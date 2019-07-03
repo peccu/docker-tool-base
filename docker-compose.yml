@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  tool:
+    build: ./build
+    tty: true
+    network_mode: "host"
+    working_dir: /work
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+    entrypoint:
+      - bash
+    # command: --help
+ 
