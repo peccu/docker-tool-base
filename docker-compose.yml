@@ -4,11 +4,17 @@ services:
     build: ./build
     tty: true
     network_mode: "host"
-    working_dir: /work
+    # env_file:
+    #  - .env
+    environment:
+      - HOME=/home/$USER
     volumes:
       - $PWD:/work
       - $HOME:/home/$USER
+    working_dir: /work
     entrypoint:
       - bash
     # command: --help
- 
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
+
