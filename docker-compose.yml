@@ -4,6 +4,8 @@ services:
     build: ./build
     tty: true
     network_mode: "host"
+    # ports:
+    #   - "3000:3000"
     # env_file:
     #  - .env
     environment:
