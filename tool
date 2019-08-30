@@ -4,4 +4,4 @@ if readlink $BASH_SOURCE >/dev/null
 then
     SCRIPT_DIR=$(dirname "$SCRIPT_DIR/$(readlink $BASH_SOURCE)")
 fi
-docker-compose -f $SCRIPT_DIR/docker-compose.yml run --rm -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
+docker-compose -f $SCRIPT_DIR/docker-compose.yml run --service-ports --rm -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
