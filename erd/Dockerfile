@@ -4,7 +4,7 @@ RUN git clone https://github.com/BurntSushi/erd
 RUN cd erd && stack setup && stack install
 
 FROM phusion/baseimage
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update
 RUN apt-get install -y graphviz \
         --no-install-recommends && \
         apt-get clean && \
