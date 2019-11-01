@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  tool:
+    build: .
+    tty: true
+    network_mode: "host"
+    # env_file:
+    #  - .env
+    environment:
+      - editor=vi
+      - HOME=/home/$USER
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+    working_dir: /work
+    # entrypoint:
+    #   - erd
+    # command: -h
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
