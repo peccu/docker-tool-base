@@ -4,6 +4,7 @@ then
     echo please use this from symlink
     echo available commands are below
     echo
+    cd $(cd $(dirname "${BASH_SOURCE:-$0}"); pwd)
     ls -d */|tr -d /|awk '{print "- " $1}'
     exit 1
 fi
