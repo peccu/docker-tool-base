@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  tool:
+    build:
+      context: .
+      args:
+        PACKAGE: graphviz
+    tty: true
+    network_mode: "host"
+    # env_file:
+    #  - .env
+    environment:
+      - editor=vi
+      - HOME=/home/$USER
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+    working_dir: /work
+    entrypoint:
+      - dot
+    command: --help
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
