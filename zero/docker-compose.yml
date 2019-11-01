@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  tool:
+    build: .
+    tty: true
+    ports:
+      - "3000:3000"
+    # network_mode: "host"
+    # env_file:
+    #  - .env
+    environment:
+      - HOME=/home/$USER
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+    working_dir: /work
+    entrypoint:
+      - zero
+    # command: --help
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
