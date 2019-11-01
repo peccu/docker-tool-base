@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  tool:
+    image: node:latest
+    tty: true
+    ports:
+      - "8000:8000"
+    # network_mode: "host"
+    # env_file:
+    #  - .env
+    environment:
+      - HOME=/home/$USER
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+    working_dir: /work
+    # command: --help
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
