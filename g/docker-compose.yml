@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  tool:
+    build:
+      context: .
+      args:
+        PACKAGE: "git emacs-nox"
+    tty: true
+    network_mode: "host"
+    # env_file:
+    #  - .env
+    environment:
+      - editor=vi
+      - HOME=/home/$USER
+    volumes:
+      - $PWD:/work
+      - $HOME:/home/$USER
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+    working_dir: /work
+    entrypoint:
+      - git
+    command: --help
+    # command: tail -f /dev/null
+    stop_signal: SIGKILL
