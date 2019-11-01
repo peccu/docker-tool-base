@@ -1,7 +1,14 @@
 #!/bin/bash
-SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}"); pwd)
-if readlink $BASH_SOURCE >/dev/null
+if ! readlink $BASH_SOURCE >/dev/null
 then
-    SCRIPT_DIR=$(dirname "$SCRIPT_DIR/$(readlink $BASH_SOURCE)")
+    echo please use this from symlink
+    echo available commands are below
+    echo
+    ls -d */|tr -d /|awk '{print "- " $1}'
+    exit 1
 fi
-docker-compose -f $SCRIPT_DIR/docker-compose.yml run --service-ports --rm -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
+
+SCRIPT_DIR=$(dirname $(readlink $BASH_SOURCE))
+TOOL_NAME=$(basename $BASH_SOURCE)
+YML=$SCRIPT_DIR/$TOOL_NAME/docker-compose.yml
+docker-compose -f $YML run --rm --name $TOOL_NAME -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
