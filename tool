@@ -12,4 +12,4 @@ fi
 SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}"); pwd)/$(dirname $(readlink $BASH_SOURCE))
 TOOL_NAME=$(basename $BASH_SOURCE)
 YML=$SCRIPT_DIR/$TOOL_NAME/docker-compose.yml
-docker-compose -f $YML run --rm --name $TOOL_NAME -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
+docker-compose -f $YML run --rm --name ${TOOL_NAME}-tool -u $UID -e "COLUMNS=$(tput cols)" -e "LINES=$(tput lines)" tool "$@"
